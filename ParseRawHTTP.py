@@ -25,10 +25,9 @@ class HTTPRequestHeader(BaseHTTPRequestHandler):
 
 def ParseRawHTTP(http_raw,is_base64=False):
     if is_base64:
-        http_raw = base64.b64decode(http_raw)
+        http_raw = base64.b64decode(http_raw.strip())
     else:
-        # 小心不可见字符\r，目前的解决方案是只要post数据包中含有不可见字符就是用base64
-        http_raw = http_raw.lstrip().replace('\n','\r\n').encode('utf-8')
+        http_raw = http_raw.lstrip().encode('utf-8')
 
     # 解析http请求头
     http_headers_class = HTTPRequestHeader(http_raw)
@@ -48,7 +47,7 @@ def ParseRawHTTP(http_raw,is_base64=False):
         http_headers_dict['Content-Length'] = str(content_length).encode('utf-8')
     else:
         http_body = ''
-    return http_url,http_method,http_headers_dict,http_body
+    return http_url.strip(),http_method.strip(),http_headers_dict,http_body
 
 # http_url,http_method,http_headers_dict,http_body = ParseRawHTTP(Raw_HTTP_Strings,True)
 # print("URL : " + http_url)
