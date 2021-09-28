@@ -48,12 +48,3 @@ def ParseRawHTTP(http_raw,is_base64=False):
     else:
         http_body = ''
     return http_url.strip(),http_method.strip(),http_headers_dict,http_body
-
-# http_url,http_method,http_headers_dict,http_body = ParseRawHTTP(Raw_HTTP_Strings,True)
-# print("URL : " + http_url)
-# print("+--------------------------------------------------------------------+")
-# print("Headers : " , http_headers_dict)
-# print("+--------------------------------------------------------------------+")
-# print("Body : ", http_body.decode('utf8'))
-# req = requests.request(method=http_method,url = "http://127.0.0.1:8000",headers=http_headers_dict,data=http_body).text
-# print(req)
